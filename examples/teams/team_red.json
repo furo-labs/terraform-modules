@@ -1,0 +1,31 @@
+{
+    "team_name": "Red team",
+    "description": "Red team",
+    "maintainers": [
+      "alan-ly",
+      "jorge-arias"
+    ],
+    "members": [
+      "sasidhara-navuluri",
+      "tom-kavanagh",
+      "jorge-arias"
+    ],
+    "repos": {
+      "admin": [
+        "organisation-team-config",
+        "webhooktest"
+      ],
+      "maintain": [
+        "usyd-welcome-exp-api",
+        "usyd-rsc-irma-sys-api",
+        "usyd-utility-api"
+      ],
+      "push": [
+        "usyd-sits-passwordsync",
+        "usyd-mule-common-api-template"
+      ],
+      "triage": [
+        "usyd-hr-adapter-ucms"
+      ]
+    }
+}
