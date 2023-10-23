@@ -22,15 +22,49 @@ Creates a Github team with defined members and corresponding roles.
 |------|------|
 | [github_team.team](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team) | resource |
 | [github_team_membership.members](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_membership) | resource |
+| [github_team_repository.teams](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_repository) | resource |
+| [github_team.parent](https://registry.terraform.io/providers/integrations/github/latest/docs/data-sources/team) | data |
+
 
 ## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_description"></a> [description](#input\_description) | n/a | `string` | `null` | no |
-| <a name="input_members"></a> [members](#input\_members) | List of members for the team and their role. For each member:<br>    - username: Github username.<br>    - role: (optional) the role granted to the team member. One of<br>        - member (default)<br>        - maintainer<br>        - owner | <pre>list(object({<br>    username = string<br>    role     = optional(string)<br>  }))</pre> | `[]` | no |
-| <a name="input_name"></a> [name](#input\_name) | n/a | `string` | n/a | yes |
-| <a name="input_parent_team_id"></a> [parent\_team\_id](#input\_parent\_team\_id) | n/a | `number` | `null` | no |
+Code block below represents the JSON input that is need for this module.
+Optional objects can be ignored and not necessary to
+
+``` json
+{
+    "team_name": "Test team",                   //(Mandatory) Name of the Team to be created
+    "description": "Test team",                 //(Optional) Description of the team to be created
+    "team_privacy": "secret",                   //(Optional) Defaulted to `closed` visile to all team members
+    "parent_team_name": "Parent team Name"      //(Optional) Name of the parent team under which new team to be created as child.
+                                                   // Defaulted to standalone team if noparent is provded.
+    "maintainers": [                            //(Optional) Users to be added to team with maintainer role
+      "user1",
+      "user2"
+    ],
+    "members": [                                //(Optional) Users to be added to team with member role
+      "user3",
+      "user4",
+      "user5"
+    ],
+    "repos": {
+      "admin": [                               //(Optional) List of repositories to be added to team with admin permissions
+        "repo1",
+        "repo2"
+      ],
+      "maintain": [                            //(Optional) List of repositories to be added to team with maintain permissions
+        "repo3",
+        "repo4"
+      ],
+      "push": [                                //(Optional) List of repositories to be added to team with push/write permissions
+        "repo5"
+      ],
+      "triage": []                             //(Optional) List of repositories to be added to team with triage permissions
+    }
+}
+
+```
+<br>
 
 ## Outputs
 
