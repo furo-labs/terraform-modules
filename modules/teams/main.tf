@@ -15,12 +15,14 @@ locals {
   uniq_members = distinct(concat(local.maintainers, local.members))
   uniq_repos   = distinct(concat(local.admin_repos, local.maintain_repos, local.push_repos, local.triage_repos))
 
+  team_privacy = try(local.team_data.team_privacy, "closed")
 }
 
 
 resource "github_team" "team" {
   name           = local.team_name
   description    = local.team_description
+  privacy        = local.team_privacy
   parent_team_id = var.parent_team_id # needs to be added in input json and get the id using data source
 }
 
