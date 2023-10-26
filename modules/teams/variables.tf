@@ -3,16 +3,6 @@ variable "json_file" {
   type        = string
 }
 
-variable "description" {
-  type    = string
-  default = null
-}
-
-variable "parent_team_id" {
-  type    = number
-  default = null
-}
-
 variable "github_token" {
   description = "GitHub access token used to configure the provider"
   type        = string

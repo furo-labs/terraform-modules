@@ -30,7 +30,7 @@ resource "github_team" "team" {
   name           = local.team_name
   description    = local.team_description
   privacy        = local.team_privacy
-  parent_team_id = var.parent_team_id # needs to be added in input json and get the id using data source
+  parent_team_id = local.parent_team_id
 }
 
 resource "github_team_membership" "members" {
