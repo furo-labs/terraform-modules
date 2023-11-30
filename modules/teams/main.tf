@@ -11,9 +11,10 @@ locals {
   maintain_repos = try(local.team_data.repos.maintain, [])
   push_repos     = try(local.team_data.repos.push, [])
   triage_repos   = try(local.team_data.repos.triage, [])
+  pull_repos     = try(local.team_data.repos.pull, [])
 
   uniq_members = distinct(concat(local.maintainers, local.members))
-  uniq_repos   = distinct(concat(local.admin_repos, local.maintain_repos, local.push_repos, local.triage_repos))
+  uniq_repos   = distinct(concat(local.admin_repos, local.maintain_repos, local.push_repos, local.triage_repos, local.pull_repos))
 
   parent_team_slug = try(lower(replace(local.team_data.parent_team_name, " ", "-")), null)
   parent_team_id   = try(data.github_team.parent[0].id, null)
@@ -44,5 +45,5 @@ resource "github_team_repository" "teams" {
   for_each   = toset(local.uniq_repos)
   team_id    = github_team.team.id
   repository = each.key
-  permission = contains(local.admin_repos, each.key) ? "admin" : contains(local.maintain_repos, each.key) ? "maintain" : contains(local.push_repos, each.key) ? "push" : contains(local.triage_repos, each.key) ? "triage" : "pull"
+  permission = contains(local.admin_repos, each.key) ? "admin" : contains(local.maintain_repos, each.key) ? "maintain" : contains(local.push_repos, each.key) ? "push" : contains(local.triage_repos, each.key) ? "triage" : contains(local.pull_repos, each.key) ? "pull" : "pull"
 }

@@ -26,6 +26,9 @@
       ],
       "triage": [
         "usyd-hr-adapter-ucms"
+      ],
+      "pull": [
+        "usyd-hr-adapter-xxxx"
       ]
     }
 }
